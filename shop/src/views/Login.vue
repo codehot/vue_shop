@@ -47,10 +47,10 @@ export default {
       this.$refs.loginForm.validate(async vlid=>{
         if(vlid){
           //console.log(vlid)
-          const {data:data} = await  this.$http.post("api.php",this.loginForm);
-          if(data.code === 200){
+          const {data:data} = await  this.$http.post("checkLogin",this.loginForm);
+          if(data.msg.status === 200){
             this.$message.success("登陆成功");
-            window.sessionStorage.setItem("token",data.userInfo.token);
+            window.sessionStorage.setItem("token",data.info.token);
             this.$router.push("/home")
           }else{
             this.$message.error("登陆失败");
