@@ -96,7 +96,7 @@ data(){
     }
   }
   .el-main{
-    background: #aeadf1;
+    background: #e3e3e3;
   }
   .home-container,.home{
     height:100%;

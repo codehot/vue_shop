@@ -4,6 +4,8 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Welcome from '../views/Welcome'
 import UserList from '../views/user/UserList'
+import Power from '../views/rights/Power'
+import Role from '../views/rights/Role'
 
 
 const originalPush = VueRouter.prototype.push
@@ -26,6 +28,14 @@ const routes = [
       {
         path:"/userlist",
         component: UserList
+      },
+      {
+        path:"/rulemenu",
+        component: Power
+      },
+      {
+        path:"/rolejue",
+        component: Role
       },
     ]
   },

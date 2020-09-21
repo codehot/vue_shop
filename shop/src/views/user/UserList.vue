@@ -30,16 +30,18 @@
                 <el-table-column label="用户名" prop="username"></el-table-column>
                 <el-table-column label="电话" prop="tel"></el-table-column>
                 <el-table-column label="邮箱" prop="email"></el-table-column>
+                <el-table-column label="角色" prop="rolename"></el-table-column>
                 <el-table-column label="添加时间" prop="addtime"></el-table-column>
                 <el-table-column label="状态" prop="status">
                     <template slot-scope="scope">
                         <el-switch v-model="scope.row.status" @change="userStatusChange(scope.row)"></el-switch>
                     </template>
                 </el-table-column>
-                <el-table-column label="操作">
+                <el-table-column label="操作" width="250px">
                       <template slot-scope="scope">
                         <el-button icon="el-icon-edit"  type="primary" size="small" @click="editUser(scope.row.id)"></el-button>
                         <el-button icon="el-icon-delete"  type="danger" size="small" @click="deleteUser(scope.row.id)"></el-button>
+                        <el-button icon="el-icon-message"  type="warning" size="small" @click="setRights(scope.row)">分配权限</el-button>
                       </template>
                 </el-table-column>
                 
@@ -106,6 +108,32 @@
                 <el-button type="primary" @click="editUserSubmit">确 定</el-button>
             </span>
         </el-dialog>
+
+        <!-- 分配角色面板 -->
+        <el-dialog
+        title="分配角色"
+        :visible.sync="roledialogVisible"
+        width="30%"
+        @close="closeRole">
+            <div style="line-height:30px">
+                用户名：{{userinfo.username}}<br />
+                用户角色：{{userinfo.rolename}}<br />
+                <div style="margin-top:20px">
+                    <el-select v-model="selectedRoleId" placeholder="请选择">
+                        <el-option
+                        v-for="item in rolelist"
+                        :key="item.rid"
+                        :label="item.name"
+                        :value="item.rid">
+                        </el-option>
+                    </el-select>
+                </div>
+            </div>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="roledialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="saveRole">确 定</el-button>
+            </span>
+        </el-dialog>
     </div>
 </template>
 
@@ -162,6 +190,10 @@ export default {
                     {validator:validateTel,trigger:'blur'}    
                 ]
             },
+            roledialogVisible: false,
+            selectedRoleId:'',
+            rolelist:[],
+            userinfo:{},
             userEditForm:{
                 id:'',
                 username:'',
@@ -273,8 +305,37 @@ export default {
                 this.$message.success("删除成功")
                 this.getUserList();
             }
-        }
+        },
+        async setRights(userinfo){
+            // console.log(userinfo);
+            this.roledialogVisible = true
+            this.userinfo = userinfo
+            const {data:res} = await this.$http.get('getrole')
+            if(res.msg.status!=200) return this.$message.error('获取权限列表失败')
+            this.rolelist = res.info.rolelist
+        },
 
+        async saveRole(){
+            // console.log(this.selectedRoleId)
+           // console.log(this.userinfo.id)
+           if(!this.selectedRoleId){
+               return this.$message.error("请选择需要分配的权限")
+           }
+            const parmas = {
+                userid:this.userinfo.id,
+                roleid:this.selectedRoleId
+            }
+            const {data:res} = await this.$http.put('saveRole',parmas)
+            if(res.msg.status !== 200) return this.$message.error("发生错误")
+            this.$message.success('操作成功')
+            this.roledialogVisible = false
+            this.getUserList()
+        },
+
+        closeRole(){
+            this.selectedRoleId = ''
+            this.userinfo={}
+        }
     }
 }
 </script>
