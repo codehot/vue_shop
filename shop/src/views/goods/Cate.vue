@@ -159,7 +159,6 @@ export default {
             //修改分类表单数据
             editCategriesDialogVisible:false,
             editCategoriesForm:{
-                id:'',
                 name:'',
                 fid: 0,
                 level: 0
@@ -179,11 +178,16 @@ export default {
     methods:{
         handleClose(){
             this.$refs.addCategoriesRef.resetFields()
+            this.selectedKeys = [],
+             this.editCategoriesForm.level = 0
+             this.editCategoriesForm.fid = 0    
         },
 
         closeeditCateForm(){
             // this.$refs.editCategoriesRef.resetFields()
-             this.selectedKeys = []
+             this.selectedKeys = [],
+             this.editCategoriesForm.level = 0
+             this.editCategoriesForm.fid = 0    
         },
        async  getCateList(){
             const {data:res} = await this.$http.get("cateList",{params:this.queryInfo})
@@ -194,11 +198,11 @@ export default {
 
         addCate(){
             this.$refs.addCategoriesRef.validate(async valid=>{
+                console.log(this.addCategoriesForm);
                 if(!valid) return this.$message.error('添加分类失败')
                 const {data:res} = await this.$http.post('addCate',this.addCategoriesForm)
                 if(res.msg.status!==200) return this.$message.error('添加分类失败')
                 this.$message.success('添加成功')
-                this.addCategoriesForm = {}
                 this.getCateList()
                 this.addCategriesDialogVisible = false
             })
@@ -234,7 +238,10 @@ export default {
         },
 
         closeCateForm(){
-            this.addCategoriesForm = {}
+             this.addCategoriesForm = {}
+             this.selectedKeys = [],
+             this.addCategoriesForm.level = 0
+             this.addCategoriesForm.fid = 0    
         },
 
         selectedchange(){
