@@ -57,7 +57,7 @@ data(){
      this.$router.push('/login')
    },
    async getCategory(){
-     const {data:data} = await this.$http("getCategory")
+     const {data:data} = await this.$http("getRights")
      this.catelist = data.info.catelist
    },
 

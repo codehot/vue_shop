@@ -27,9 +27,10 @@ import {
     Col, 
     Pagination, 
     Dialog,
-    MessageBox, Tag, Tree, Select, Option
+    MessageBox, Tag, Tree, Select, Option, Cascader
   } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import TreeTable from 'vue-table-with-tree-grid'
 import "./assets/css/global.css"
 import VueRouter from 'vue-router'
 
@@ -58,6 +59,8 @@ Vue.use(Tag)
 Vue.use(Tree)
 Vue.use(Select)
 Vue.use(Option)
+Vue.use(Cascader)
+
 
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
@@ -71,6 +74,7 @@ axios.interceptors.request.use(config=>{
 Vue.prototype.$http = axios;
 
 Vue.config.productionTip = false
+Vue.component('tree-table',TreeTable)
 
 new Vue({
   router,

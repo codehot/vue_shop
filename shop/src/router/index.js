@@ -6,6 +6,7 @@ import Welcome from '../views/Welcome'
 import UserList from '../views/user/UserList'
 import Power from '../views/rights/Power'
 import Role from '../views/rights/Role'
+import Cate from '../views/goods/Cate'
 
 
 const originalPush = VueRouter.prototype.push
@@ -36,6 +37,10 @@ const routes = [
       {
         path:"/rolejue",
         component: Role
+      },
+      {
+        path:"/categories",
+        component: Cate
       },
     ]
   },
