@@ -27,7 +27,7 @@ import {
     Col, 
     Pagination, 
     Dialog,
-    MessageBox, Tag, Tree, Select, Option, Cascader
+    MessageBox, Tag, Tree, Select, Option, Cascader, Alert, Tabs
   } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import TreeTable from 'vue-table-with-tree-grid'
@@ -60,6 +60,10 @@ Vue.use(Tree)
 Vue.use(Select)
 Vue.use(Option)
 Vue.use(Cascader)
+Vue.use(Alert)
+Vue.use(Tabs)
+Vue.use(TabPane)
+
 
 
 Vue.prototype.$message = Message

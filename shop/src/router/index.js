@@ -7,6 +7,7 @@ import UserList from '../views/user/UserList'
 import Power from '../views/rights/Power'
 import Role from '../views/rights/Role'
 import Cate from '../views/goods/Cate'
+import Params from '../views/goods/Params'
 
 
 const originalPush = VueRouter.prototype.push
@@ -42,6 +43,10 @@ const routes = [
         path:"/categories",
         component: Cate
       },
+      {
+        path:"/params",
+        component: Params
+      }
     ]
   },
   {
