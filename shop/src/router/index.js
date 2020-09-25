@@ -8,7 +8,8 @@ import Power from '../views/rights/Power'
 import Role from '../views/rights/Role'
 import Cate from '../views/goods/Cate'
 import Params from '../views/goods/Params'
-
+import Goodslist from '../views/goods/GoodsList'
+import Add from '../views/goods/Add'
 
 const originalPush = VueRouter.prototype.push
 VueRouter.prototype.push = function push(location) {
@@ -17,36 +18,21 @@ VueRouter.prototype.push = function push(location) {
 Vue.use(VueRouter)
 
 const routes = [
-
+  { path:"/",redirect:'/login'},
   {
     path: '/home',
     component: Home,
     redirect: "/welcome",
     children:[
-      {
-        path:"/welcome",
-        component: Welcome
-      },
-      {
-        path:"/userlist",
-        component: UserList
-      },
-      {
-        path:"/rulemenu",
-        component: Power
-      },
-      {
-        path:"/rolejue",
-        component: Role
-      },
-      {
-        path:"/categories",
-        component: Cate
-      },
-      {
-        path:"/params",
-        component: Params
-      }
+      { path:"/welcome",component: Welcome},
+      { path:"/userlist",component: UserList},
+      { path:"/rulemenu",component: Power},
+      { path:"/rolejue",component: Role },
+      { path:"/categories", component: Cate},
+      { path:"/params",component: Params },
+      { path:"/goods",component: Goodslist },
+      { path:"/goods/add",component: Add }
+      
     ]
   },
   {

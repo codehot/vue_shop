@@ -3,6 +3,12 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import axios from 'axios'
+import VueQuillEditor from 'vue-quill-editor'
+ 
+// require styles
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
 import {
     Form,
     FormItem,
@@ -27,12 +33,24 @@ import {
     Col, 
     Pagination, 
     Dialog,
-    MessageBox, Tag, Tree, Select, Option, Cascader, Alert, Tabs
+    MessageBox, 
+    Tag, 
+    Tree, 
+    Select, 
+    Option, 
+    Cascader, 
+    Alert, 
+    Tabs, 
+    Steps, 
+    Step,
+    CheckboxGroup, 
+    Checkbox, 
+    Upload
   } from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import TreeTable from 'vue-table-with-tree-grid'
 import "./assets/css/global.css"
-import VueRouter from 'vue-router'
+// import VueRouter from 'vue-router'
 
 Vue.use(Form)
 Vue.use(FormItem)
@@ -63,7 +81,13 @@ Vue.use(Cascader)
 Vue.use(Alert)
 Vue.use(Tabs)
 Vue.use(TabPane)
+Vue.use(Steps)
+Vue.use(Step)
+Vue.use(CheckboxGroup)
+Vue.use(Checkbox)
+Vue.use(Upload)
 
+Vue.use(VueQuillEditor)
 
 
 Vue.prototype.$message = Message
